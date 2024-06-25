@@ -19,6 +19,8 @@
             background-color: #000;
             overflow: hidden;
             user-select: none; /* Kopyalamayı engelle */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE10+ */
         }
 
         .container {
@@ -84,6 +86,46 @@
             transform: translate(-50%, -50%) scale(1);
             opacity: 1;
         }
+
+        .fall {
+            animation: fall 2s forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -100%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                top: 50%;
+                opacity: 1;
+            }
+        }
+
+        .dust {
+            opacity: 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: dust 3s forwards;
+        }
+
+        @keyframes dust {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -97,17 +139,20 @@
             <p>Kadir</p>
         </div>
         <div class="profile" id="profile3">
-            <img src="tt.png" alt="Hurşit">
+            <img src="dc.png" alt="Hurşit">
             <p>Hurşit</p>
         </div>
         <div class="profile" id="profile4">
-            <img src="dc.png" alt="2121e">
+            <img src="tt.png" alt="2121e">
             <p>2121e</p>
         </div>
     </div>
     <div class="message" id="message">BY ENES</div>
+    <div class="dust" id="dust">* * * * * * * * * *</div>
 
     <script>
+        document.addEventListener('contextmenu', event => event.preventDefault()); /* Sağ tıklamayı engelle */
+        document.addEventListener('selectstart', event => event.preventDefault()); /* Seçmeyi engelle */
         document.querySelectorAll('.profile').forEach(profile => {
             profile.addEventListener('click', function() {
                 document.querySelectorAll('.profile').forEach(p => {
@@ -120,6 +165,8 @@
                 setTimeout(() => {
                     profile.classList.add('hide');
                     document.getElementById('message').classList.add('show');
+                    document.getElementById('message').classList.add('fall');
+                    document.getElementById('dust').classList.add('dust');
                 }, 3000);
 
                 setTimeout(() => {
