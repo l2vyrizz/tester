@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Seçimi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            transition: all 0.5s ease;
+        }
+
+        .profile {
+            position: relative;
+            width: 150px;
+            text-align: center;
+            transition: transform 0.5s, opacity 0.5s;
+            cursor: pointer;
+        }
+
+        .profile img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s;
+        }
+
+        .profile p {
+            color: #fff;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .profile:hover img {
+            transform: scale(1.1);
+        }
+
+        .hide {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.5);
+            transition: transform 0.5s, opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile" id="profile1">
+            <img src="yt.png" alt="Cüneyt">
+            <p>YT DENE</p>
+        </div>
+        <div class="profile" id="profile2">
+            <img src="dc.png" alt="Kadir">
+            <p>YT DENE5</p>
+        </div>
+        <div class="profile" id="profile3">
+            <img src="yt2.png" alt="Hurşit">
+            <p>Hurşitkjdkr</p>
+        </div>
+        <div class="profile" id="profile4">
+            <img src="tt.png" alt="2121e">
+            <p>2121ekek</p>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.profile').forEach(profile => {
+            profile.addEventListener('click', function() {
+                document.querySelectorAll('.profile').forEach(p => {
+                    if (p !== profile) {
+                        p.classList.add('hide');
+                    }
+                });
+                profile.classList.add('center');
+
+                setTimeout(() => {
+                    profile.classList.add('hide');
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+  </html>
