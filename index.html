@@ -17,13 +17,14 @@
             align-items: center;
             height: 100vh;
             background-color: #000;
+            overflow: hidden;
+            user-select: none; /* Kopyalamayı engelle */
         }
 
         .container {
-            display: flex;
-            justify-content: space-around;
-            width: 80%;
-            transition: all 0.5s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .profile {
@@ -32,18 +33,22 @@
             text-align: center;
             transition: transform 0.5s, opacity 0.5s;
             cursor: pointer;
+            user-select: none; /* Kopyalamayı engelle */
         }
 
         .profile img {
             width: 100%;
             border-radius: 10px;
             transition: transform 0.5s;
+            user-select: none; /* Kopyalamayı engelle */
+            pointer-events: none; /* Sağ tık ve sürüklemeyi engelle */
         }
 
         .profile p {
             color: #fff;
             margin-top: 10px;
             font-size: 18px;
+            user-select: none; /* Kopyalamayı engelle */
         }
 
         .profile:hover img {
@@ -53,6 +58,7 @@
         .hide {
             opacity: 0;
             transform: scale(0);
+            transition: transform 1s, opacity 1s;
         }
 
         .center {
@@ -60,7 +66,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.5);
-            transition: transform 0.5s, opacity 0.5s;
+            transition: transform 1s, opacity 1s;
+        }
+
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #fff;
+            font-size: 2em;
+            opacity: 0;
+            transition: transform 1s, opacity 1s;
+        }
+
+        .message.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
         }
     </style>
 </head>
@@ -68,21 +90,23 @@
     <div class="container">
         <div class="profile" id="profile1">
             <img src="yt.png" alt="Cüneyt">
-            <p>YT DENE</p>
+            <p>Cüneyt</p>
         </div>
         <div class="profile" id="profile2">
-            <img src="dc.png" alt="Kadir">
-            <p>YT DENE5</p>
+            <img src="yt2.png" alt="Kadir">
+            <p>Kadir</p>
         </div>
         <div class="profile" id="profile3">
-            <img src="yt2.png" alt="Hurşit">
-            <p>Hurşitkjdkr</p>
+            <img src="tt.png" alt="Hurşit">
+            <p>Hurşit</p>
         </div>
         <div class="profile" id="profile4">
-            <img src="tt.png" alt="2121e">
-            <p>2121ekek</p>
+            <img src="dc.png" alt="2121e">
+            <p>2121e</p>
         </div>
     </div>
+    <div class="message" id="message">BY ENES</div>
+
     <script>
         document.querySelectorAll('.profile').forEach(profile => {
             profile.addEventListener('click', function() {
@@ -95,9 +119,14 @@
 
                 setTimeout(() => {
                     profile.classList.add('hide');
+                    document.getElementById('message').classList.add('show');
                 }, 3000);
+
+                setTimeout(() => {
+                    document.getElementById('message').classList.remove('show');
+                }, 8000);
             });
         });
     </script>
 </body>
-  </html>
+</html>
